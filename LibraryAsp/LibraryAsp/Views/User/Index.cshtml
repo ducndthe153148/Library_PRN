@@ -62,11 +62,46 @@
                     </div>
                 </form>
             </div>
-
+            @{ var itemName = "#editModal" + ViewBag.list.email;
+                var itemName1 = "editModal" + ViewBag.list.email; 
+                }
             <div class="row">
                 <div class="col align-self-start">
-                    <a href="/User/Edit" class="btn btn-secondary" >Chỉnh sửa thông tin</a>
+                    <a href="/User/Edit" class="btn btn-secondary">Chỉnh sửa thông tin</a>
                     <a href="/User/UpdatePassword" class="btn btn-warning">Đổi mật khẩu</a>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="@itemName">
+                        Đổi mật khẩu
+                    </button>
+
+                    <!-- Modal form to edit information-->
+                    <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <form action="/Publisher/Update" method="post">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="">Sửa Nhà Xuất Bản</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div id="resultss" class="modal-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên Nhà Xuất Bản: </label>
+                                                    <input class="form-control" type="text" id="name" name="name" value="Test">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="width:100px" class="btn btn-primary">Sửa</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col align-self-end">
                 </div>
