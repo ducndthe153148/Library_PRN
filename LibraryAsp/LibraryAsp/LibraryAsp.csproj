@@ -290,11 +290,13 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dao\AuthenticationDao.cs" />
     <Compile Include="Dao\BookDao.cs" />
     <Compile Include="Dao\CategoryDao.cs" />
+    <Compile Include="Dao\PostDao.cs" />
     <Compile Include="Dao\PublisherDao.cs" />
     <Compile Include="Dao\TransactionDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -485,6 +487,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
     <Content Include="Views\User\UpdatePassword.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
