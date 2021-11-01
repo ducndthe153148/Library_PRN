@@ -34,7 +34,7 @@ namespace LibraryAsp.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "BorrowBook");
+                return RedirectToAction("Index", "Home");
             }
             
             else
