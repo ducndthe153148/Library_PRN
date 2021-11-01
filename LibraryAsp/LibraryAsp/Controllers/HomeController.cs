@@ -22,6 +22,7 @@ namespace LibraryAsp.Controllers
                 PostDao post = new PostDao();
                 //ViewBag.Msg = msg;
                 ViewBag.List = post.getAll();
+                ViewBag.Latest = post.getLatestPost();
                 return View();
             }
         }
