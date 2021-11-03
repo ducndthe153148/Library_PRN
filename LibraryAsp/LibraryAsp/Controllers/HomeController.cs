@@ -20,8 +20,10 @@ namespace LibraryAsp.Controllers
             else
             {
                 PostDao post = new PostDao();
+                BookDao book = new BookDao();
                 //ViewBag.Msg = msg;
                 ViewBag.List = post.getAll();
+                ViewBag.Book = book.getFiveBook();
                 ViewBag.Latest = post.getLatestPost();
                 return View();
             }

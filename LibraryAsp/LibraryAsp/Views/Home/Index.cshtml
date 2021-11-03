@@ -6,8 +6,6 @@
 
 <main>
     <div>
-        <img src="https://hcmportal.fpt.edu.vn/images/logo.png"
-             style="width: 50%" />
         <div class="row">
             <div class="col-md-8">
                 <div class="container py-2">
@@ -54,7 +52,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="row bg-primary bg-opacity-75 rounded-3" 
+                    <div class="row bg-primary bg-opacity-75 rounded-3"
                          style="background-color: #f39f86; background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
@@ -95,44 +93,25 @@
                     <div class="row">
                         <div class="card mb-1">
                             <div class="row g-0">
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-tran-trong-chinh-minh.jpg"
-                                             class="img-fluid rounded-start"
-                                             alt="..." />
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card-body text-truncate">
-                                        <p class="card-title">
-                                            <a href="#"
-                                               class="fw-bold text-dark text-decoration-none h5">
-                                                Trân trọng chính mình
-                                            </a>
-                                        </p>
-                                        <p class="card-text">Patricia Spadaro</p>
+                                @foreach (var item in ViewBag.Book)
+                                {
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="<img style=" width: 120px !important;height: 150px !important;" src="/Content/assets/img/@item.image" class="img-fluid">"
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-Tuoi-tre-ban-khoan.jpg"
-                                             class="img-fluid rounded-start"
-                                             alt="..." />
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card-body text-truncate">
-                                        <p class="card-title">
-                                            <a href="#"
-                                               class="fw-bold text-dark text-decoration-none h5">
-                                                Tuổi trẻ băn khoăn
-                                            </a>
-                                        </p>
-                                        <p class="card-text">Hermann Hesse</p>
+                                    <div class="col-md-9">
+                                        <div class="card-body text-truncate">
+                                            <p class="card-title">
+                                                <a href="#"
+                                                   class="fw-bold text-dark text-decoration-none h5">
+                                                    @item.name
+                                                </a>
+                                            </p>
+                                            <p class="card-text">@item.author</p>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>
