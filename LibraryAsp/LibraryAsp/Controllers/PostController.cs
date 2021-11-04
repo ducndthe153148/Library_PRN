@@ -18,5 +18,9 @@ namespace LibraryAsp.Controllers
             ViewBag.List = post.getAll();
             return View();
         }
+        public ActionResult getPostById(int id)
+        {
+            return RedirectToAction("Post/Index");
+        }
     }
 }

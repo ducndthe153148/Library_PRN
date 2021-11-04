@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="container py-2">
-                    <div class="row bg-primary bg-opacity-75 rounded-3"
+                    <div class="my-2 row bg-primary bg-opacity-75 rounded-3"
                          style="
                 background-color: #f39f86;
                 background-image: linear-gradient(
@@ -20,9 +20,9 @@
               ">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
-                                <i class="far fa-newspaper-o font text-dark fw-bold">
+                                <p class="font text-dark fw-bold">
                                     Giới thiệu
-                                </i>
+                                </p>
                             </span>
                         </div>
                     </div>
@@ -37,16 +37,16 @@
                                 @ViewBag.Latest.content
                             </p>
                             <p style="text-align: right; padding-right: 20px; font-style: italic;">
-                                @ViewBag.Latest.id_publisher
-                            </p>
-                            <p>
-                                Xem thông tin sách tại đây:
-                                <button type="button"
-                                        class="btn btn-warning"
-                                        data-bs-toggle="modal"
-                                        style="width: 100px !important">
-                                    Chi tiết
-                                </button>
+                                Nhà xuất bản
+                                @{var nhaxb = new LibraryAsp.Dao.PublisherDao().getAll();
+                                }
+                                @foreach (var item1 in nhaxb)
+                                {
+                                    if (item1.id_publisher == ViewBag.Latest.id_publisher)
+                                    {
+                                        @item1.name;
+                                    }
+                                }
                             </p>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                          style="background-color: #f39f86; background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
-                                <i class="far fa-newspaper-o font text-dark fw-bold">
+                                <i class="font text-dark fw-bold">
                                     Các bài giới thiệu khác
                                 </i>
                             </span>
@@ -65,8 +65,11 @@
                     @foreach (var item in ViewBag.List)
                     {
                         <div style="display: flex; justify-content: space-between;">
-                            <a href="#">Giới thiệu sách: @item.title</a>
-                            <p>@item.createdAt</p>
+                            <a href="/postDetails/@item.id_post">Giới thiệu sách: @item.title</a>
+                            @{ 
+                                string dateCreate = String.Format("{0:dd-MM-yyyy H:mm}", item.createdAt);
+                            }
+                            <p>@dateCreate</p>
                         </div>
                     }
                 </div>
@@ -84,7 +87,7 @@
               ">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
-                                <i class="far fa-thumbs-up font text-dark fw-bold">
+                                <i class="font text-dark fw-bold">
                                     Sách nổi bật
                                 </i>
                             </span>
@@ -92,12 +95,14 @@
                     </div>
                     <div class="row">
                         <div class="card mb-1">
+                            @{var category = new LibraryAsp.Dao.CategoryDao().getAll();
+                            }
                             <div class="row g-0">
                                 @foreach (var item in ViewBag.Book)
                                 {
                                     <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="<img style=" width: 120px !important;height: 150px !important;" src="/Content/assets/img/@item.image" class="img-fluid">"
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#check">
+                                            <img style=" width: 80px !important;height: 80px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="col-md-9">
@@ -111,6 +116,72 @@
                                             <p class="card-text">@item.author</p>
                                         </div>
                                     </div>
+                                    <div class="modal fade" id="check" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <img style="width: 100% !important;height: 250px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách</label>
+                                                                :@item.name
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả</label>
+                                                                :@item.author
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Nhà xuất bản</label>
+                                                                : @foreach (var item2 in nhaxb)
+                                                                {
+                                                                    if (item2.id_publisher == item.id_publisher)
+                                                                    {
+                                                                        @item2.name;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Thể loại</label>
+                                                                : @foreach (var item1 in category)
+                                                                {
+                                                                    if (item1.id_category == item.id_category)
+                                                                    {
+                                                                        @item1.name;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm phát hành</label>
+                                                                : @item.year_publish
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Giá thuê</label>
+                                                                : @item.price VND
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Ngày thêm</label>
+                                                                : @item.createdAt
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;">Nội dung</label><br />
+                                                            @Html.Raw(item.description)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -120,37 +191,5 @@
         </div>
     </div>
 </main>
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" />
-<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous" />
-<link rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous" />
-<link rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+
 

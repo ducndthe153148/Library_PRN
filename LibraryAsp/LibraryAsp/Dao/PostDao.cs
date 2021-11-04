@@ -20,7 +20,6 @@ namespace LibraryAsp.Dao
         public Post getLatestPost()
         {
             return myDb.posts.OrderByDescending(x => x.id_post).FirstOrDefault();
-            
         }
     }
 }
