@@ -19,7 +19,7 @@ namespace LibraryAsp
            );
             routes.MapRoute(
                name: "postDetails",
-               url: "postDetail/{id}",
+               url: "postDetails/{id}",
                defaults: new { controller = "Post", action = "getPostById" }
            );
             routes.MapRoute(

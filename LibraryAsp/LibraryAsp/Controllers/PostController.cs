@@ -20,7 +20,8 @@ namespace LibraryAsp.Controllers
         }
         public ActionResult getPostById(int id)
         {
-            return RedirectToAction("Post/Index");
+            Post p = post.getInformationById(id);
+            return RedirectToAction("Index");
         }
     }
 }
